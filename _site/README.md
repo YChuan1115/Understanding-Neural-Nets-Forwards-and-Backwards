@@ -1,17 +1,3 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>{{ page.title }}</title>
-        <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" >
-    </head>
-    <body>
-and in foot.html:
-
-</body>
-
-
-
 # Understanding Understanding Neural Nets Forwards and Backwards
 **Benjamin S. Knight**, March 5th, 2017
 
@@ -90,8 +76,4 @@ For those wanting additional detail, I highly recommend [this](https://www.khana
 
 - Karpathy, Andrej. [MachineLearner]. (2016, June 14th). *CS231n Lecture 4 - Backpropagation, Neural Networks*. Retrieved from [https://www.youtube.com/watch?v=QWfmCyLEQ8U](https://www.youtube.com/watch?v=QWfmCyLEQ8U).
 
-<<<<<<< HEAD
-</html>
-=======
-</html>
->>>>>>> 713eea46361560d41395611efe429e8ef73ae0b1
+
