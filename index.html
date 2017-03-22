@@ -32,7 +32,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
 <p align="center"><b>Figure 1: An Example Neural Net</b></p>
 
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
+<img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/blob/gh-pages/_site/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
 </p>
 
 <p> &nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
