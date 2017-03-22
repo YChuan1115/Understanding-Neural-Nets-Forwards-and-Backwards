@@ -1,14 +1,23 @@
+---
+layout: default
+title: {{ site.name }}
+---
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{{ page.title }}</title>
-        <link rel="stylesheet" href="{{ site.baseurl }}/css/main.css" >
+<head>
+<div id="home">
+  <h1>Blog Posts</h1>
+  <ul class="posts">
+    {% for post in site.posts %}
+      <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+
     </head>
     <body>
-and in foot.html:
 
-</body>
+
 
 
 
@@ -90,8 +99,6 @@ For those wanting additional detail, I highly recommend [this](https://www.khana
 
 - Karpathy, Andrej. [MachineLearner]. (2016, June 14th). *CS231n Lecture 4 - Backpropagation, Neural Networks*. Retrieved from [https://www.youtube.com/watch?v=QWfmCyLEQ8U](https://www.youtube.com/watch?v=QWfmCyLEQ8U).
 
-<<<<<<< HEAD
+</body>
 </html>
-=======
-</html>
->>>>>>> 713eea46361560d41395611efe429e8ef73ae0b1
+
