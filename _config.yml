@@ -1,1 +1,4 @@
-theme: jekyll-theme-cayman
+name: Understanding Neural Nets Forwards and Backwards
+markdown: redcarpet
+pygments: true
+baseurl: /Understanding-Neural-Nets-Forwards-and-Backwards/
