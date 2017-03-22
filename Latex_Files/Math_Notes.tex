@@ -1,0 +1,123 @@
+\documentclass[]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{hyperref}
+
+%opening
+\title{Backwards Propagation}
+\author{Benjamin S. Knight}
+
+\begin{document}
+
+\maketitle
+
+\noindent\textbf{The Derivative of the Sigmoid Function}\\
+\begin{equation} \label{eq1}
+\begin{split}
+\displaystyle\frac{\delta}{\delta x}\sigma(x) & = \displaystyle\frac{\delta}{\delta x}\Big[\displaystyle\frac{1}{1 + e^{-x}}\Big] \\
+& = \displaystyle\frac{\delta}{\delta x}(1 + e^{-x})^{-1} \\
+& = (-1)(1 + e^{-x})^{-2}\displaystyle\frac{\delta}{\delta x}(1 + e^{-x}) \\
+& = (-1)(1 + e^{-x})^{-2}(e^{-x}) \\
+& = -(1 + e^{-x})^{-2}(-e^{-x})\\
+& = \displaystyle\frac{e^{-x}}{(1 + e^{-x})^2} \\
+& = \displaystyle\frac{1}{1 + e^{-x}}*\displaystyle\frac{e^{-x}}{1 + e^{-x}}\\
+& = \displaystyle\frac{1}{1 + e^{-x}}*\displaystyle\frac{(1 + e^{-x}) - 1}{1 + e^{-x}}\\
+& = \displaystyle\frac{1}{1 + e^{-x}}*\Big(1 - \displaystyle\frac{1}{1 + e^{-x}}\Big)\\
+& = \sigma(x)*(1 - \sigma(x))
+\end{split}
+\end{equation}
+
+\noindent\textbf{Back Propagation from the Output to the Output Layer via the Sigmoid Function}\\
+
+\begin{equation} 
+\begin{split}
+y & = 1  \\
+\hat{y} & = 0.21 \\
+\therefore E & = 0.79 \\
+\end{split}
+\end{equation}
+
+\begin{equation} 
+\begin{split}
+\delta^j & = (y - \hat{y})*\sigma(x)*(1 - \sigma(x)) \text{ where $x$ = -1.28 and $\hat{y}$ = 0.21}\\
+& = (1 - 0.21)\Big(\displaystyle\frac{1}{1 + e^{-(-1.28)}}\Big)\Big(1 - \displaystyle\frac{1}{1 + e^{-(-1.28)}}\Big)\\
+& = (1 - 0.21)(0.21)(1 - 0.21)\\
+& = (0.79)(0.21)(0.79)\\
+& = 0.131
+\end{split}
+\end{equation}
+
+\noindent\textbf{A Note on Partial Derivatives}\\
+With partial derivatives, we are interested in specific change with respect to some other variable of interest. Take the following expression. 
+\[f(x, y) = x^2 + xy + y^2\]
+If we take the partial derivative with respect to $x$, then we can drop all isolated instances of $y$. Thus,
+\newpage
+\begin{equation} 
+\begin{split}
+\displaystyle\frac{\partial f}{\partial x}(x,y) & = \displaystyle\frac{\partial f}{\partial x}(x^2 + xy + y^2) \\
+& = 2x^{1} + (1)x^0y + 0 \\
+& = 2x + y
+\end{split}
+\end{equation}
+\begin{equation} 
+\begin{split}
+\displaystyle\frac{\partial f}{\partial y}(x,y) & = \displaystyle\frac{\partial f}{\partial y}(x^2 + xy + y^2) \\
+& = 0 + x(1)y^0 + 2y^1 \\
+& = x + 2y
+\end{split}
+\end{equation}
+
+
+
+\[f(h1) = x_1(W_{x1}^{h1}) + x_2(W_{x2}^{h1}) \text{\phantom{aaa}} \rightarrow \text{\phantom{aaa}} \displaystyle\frac{\partial h_1}{\partial x_1} = W_{x1}^{h1} \text{\phantom{a} and \phantom{a}} \displaystyle\frac{\partial h_1}{\partial x_2} = W_{x2}^{h1}\]
+\[f(h2) = x_1(W_{x1}^{h2}) + x_2(W_{x2}^{h2}) \text{\phantom{aaa}} \rightarrow \text{\phantom{aaa}} \displaystyle\frac{\partial h_2}{\partial x_1} = W_{x1}^{h2} \text{\phantom{a} and \phantom{a}} \displaystyle\frac{\partial h_2}{\partial x_2} = W_{x2}^{h2}\]
+
+\begin{equation} 
+\begin{split}
+\delta^h1 & = W^hj\delta^0f'(h) 
+\end{split}
+\end{equation}
+
+
+
+
+\noindent\textbf{The Output Layer}\\
+Assume that during forward propagation \textit{j} is an input to \textit{h}. During back propagation, this order of inputs reverses. Recall that the derivative of the sum is the sum of the derivatives. Bearing this in mind, we see that the partial derivative of the error term \textit{E} with respect to node \textit{j} - the function which outputs the value for \textit{j} that minimizes \textit{E} - is as follows:
+\begin{equation} \label{eq1}
+\begin{split}
+\displaystyle\frac{\delta E}{\delta g_j} & = \sum_i\sigma'(h_i)v_{ij}\displaystyle\frac{\delta E}{\delta h_i}\\
+\end{split}
+\end{equation}
+
+\newpage
+\noindent\textbf{Back Propagation}\\
+\indent Let there by two nodes - one hidden node $i$ and one output node $j$. Let $y_j$ represent the final output of the neural net. $y_i$ will represent the output of the hidden node $i$. Let $z_j$ represent the total input received by the output unit, $j$.\\
+\indent We want an expression that shows the extent to which the error term $E$ changes as a function of total input received by the output unit. For this we use the partial derivative of the error term with respect to $z_j$.
+\[\displaystyle\frac{\partial E}{\partial z_j} \]
+Because the loss function that derives $E$ relies on inputs from another function - the $j$ node, we must invoke the chain rule. If function $F(x)$ is itself a function of $g(x)$, then the derivative of $F(x)$ is equal to the derivative of the parent function times the child function.
+\[\text{If }F(x) = f(g(x)) \] 
+\[\text{then }F'(x) = f'(g(x))g'(x) \] 
+...or in our case:
+\[\displaystyle\frac{\partial E}{\partial z_j}  = \displaystyle\frac{\partial E}{\partial y_j}\displaystyle\frac{\partial y_j}{\partial z_j}\]
+
+
+\noindent\textbf{The Sum of Squared Errors}\\
+The derivative of the error term with respect to the input node \textit{j} is the derivative of the sum of squares. In this instance, there is only a single output, so we then drop the summation operator. Given that we are interested in minimizing the loss function, we change the sign on the resulting function to effectively maximize negative error. 
+\begin{equation} \label{eq1}
+\begin{split}
+\displaystyle\frac{\delta E}{\delta y_j} & = \displaystyle\frac{\delta}{\delta y_j}\Big(1/2\sum(y^\mu - \hat{y}^\mu)^2\Big)\\
+& = 2(1/2)\sum(y^\mu - \hat{y}^\mu)^1\\
+& = \sum(y^\mu - \hat{y}^\mu) \text{\phantom{aaaa}} \rightarrow \text{\phantom{aaaa}} y^\mu - \hat{y}^\mu \\
+& \text{\phantom{aaaaaaaaaaaaaaaaaaaaaaaaaaa}} \big\downarrow\\
+& \text{\phantom{aaaaaaaaaaaaaaaaa}} \displaystyle\frac{\delta E}{\delta y_j} = -(y^\mu - \hat{y}^\mu)
+\end{split}
+\end{equation}
+
+
+
+
+
+
+
+\end{document}
