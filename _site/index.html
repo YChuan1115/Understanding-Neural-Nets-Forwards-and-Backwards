@@ -58,10 +58,10 @@
 <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
 
 <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
+
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Forward_Pass_GIF.gif" alt="A GIF showing one forward pass of the neural network." width="70%" height="68%">
+<img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Forward_Pass_GIF.gif"  width="820" height="400" alt="A GIF showing one forward pass of the neural network.">
 </p>
-<br>
 
 <h4> What is a Gradient? </h4>
 <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The purpose of backwards propagation is to enable us to train the model - typically with some version of gradient descent. To understand how gradient descent is accomplished, it is helpful to know what a gradient is. Below is a visualization of what an error gradient would look like with two variables. In deriving the error gradient, our variables are referred to as 'edges' - the connections between nodes. </p>
@@ -73,18 +73,14 @@
 <p align="center">Source: <a href="https://www.youtube.com/watch?v=wobhkK0h1wc">Zoran Vrhovski</a> May 29th, 2012</p>
 <br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A neural net can be thought of as one, very large differentiable equation with many variables. To better understand any complex system with many inputs, it is often useful to specify a relationship between the outcome variable and a specific variable of interest. Mathmatically, we do this by taking the partial derivative of the equation with respect to the variable of interest. When taking the partial derivative, any component of the expression that is not somehow associated with the variable of interest is effectively set to zero. Note in the figure below how different elements drop out of relevance based on what variable we are taking the partial derivative with respect to.
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A neural net can be thought of as one, very large differentiable equation with many variables. To better understand any complex system with many inputs, it is often useful to specify a relationship between the outcome variable and a specific variable of interest. Mathmatically, we do this by taking the partial derivative of the equation with respect to the variable of interest. When taking the partial derivative, any component of the expression that is not somehow associated with the variable of interest is effectively set to zero. Note in the figure below how different elements drop out of relevance based on what variable we are taking the partial derivative with respect to. </p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For those wanting additional detail, I highly recommend [this](https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/gradient) series of video lectures from Kahn Academy. </p>
 
-
-
-For those wanting additional detail, I highly recommend [this](https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/gradient) series of video lectures from Kahn Academy. 
-
-### Calculating the Gradient
-
+<h4> Calculating the Gradient </h4>
 
 <p align="center"><b>Figure 3: Identifying the Error Derivatives from the Neural Net's Edges</b></p>
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Gradient.gif" alt="A Three Dimensional Visualization of Gradient Descent Courtesy of Zoran Vrhovski.">
+<img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient.gif" alt="A Three Dimensional Visualization of Gradient Descent Courtesy of Zoran Vrhovski.">
 </p>
 <br>
 
@@ -92,33 +88,34 @@ For those wanting additional detail, I highly recommend [this](https://www.khana
 
 <p align="center"><b> Expression 3: Gradient (Edge 1) - The Loss Function Error</b></p>
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Gradient_1.png" alt="Calculating the error of the loss function - here the sum of squares." width="45%" height="45%">
+<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient_1.png" alt="Calculating the error of the loss function - here the sum of squares." width="45%" height="45%">
 </p>
 
 <p align="center"><b> Expression 4: Gradient (Edge 2) - The Sigmoid (Activation) Function Error</b></p>
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Gradient_2.png" alt="Calculating the error of the activation function - here a sigmoid function." width="60%" height="60%">
+<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient_2.png" alt="Calculating the error of the activation function - here a sigmoid function." width="60%" height="60%">
 </p>
 
 <p align="center"><b> Expressions 5 &amp; 6: Gradient (Edges 3-4) - The Output Layer Error</b></p>
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Gradient_Output_Layer.png" alt="Calculating the error of the two edges within the output layer." width="70%" height="70%">
+<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient_Output_Layer.png" alt="Calculating the error of the two edges within the output layer." width="70%" height="70%">
 </p>
 
 <p align="center"><b> Expressions 7-10: Gradient (Edges 5-8) - The Hidden Layer Error</b></p>
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Gradient_Hidden_Layer.png" alt="Calculating the error of the two edges within the output layer." width="70%" height="70%">
+<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient_Hidden_Layer.png" alt="Calculating the error of the two edges within the output layer." width="70%" height="70%">
 </p>
 <br>
 
-## References
-
-- Hinton, Geoffrey. [Artificial Intelligence Courses]. (2013, November 4th). *The Backpropagation Algorithm*. Retrieved from [https://www.youtube.com/watch?v=xfPz92B0rv8](https://www.youtube.com/watch?v=xfPz92B0rv8).
-
-- Hinton, Geoffrey. (2010). A Practical Guide to Training Restricted Boltzmann Machines. Retrieved from [http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf).
-
-- Karpathy, Andrej. [MachineLearner]. (2016, June 14th). *CS231n Lecture 4 - Backpropagation, Neural Networks*. Retrieved from [https://www.youtube.com/watch?v=QWfmCyLEQ8U](https://www.youtube.com/watch?v=QWfmCyLEQ8U).
-
+<h3> References </h3>
+	<ul style="list-style-type:disc">
+		<li> Hinton, Geoffrey. [Artificial Intelligence Courses]. (2013, November 4th). <b>The Backpropagation Algorithm</b>b>. 
+		Retrieved from <a href="https://www.youtube.com/watch?v=xfPz92B0rv8">https://www.youtube.com/watch?v=xfPz92B0rv8</a>.</li>
+		<li> Hinton, Geoffrey. (2010). A Practical Guide to Training Restricted Boltzmann Machines. 
+		Retrieved from <a href="http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf">http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf</a>.</li>
+		<li> Karpathy, Andrej. [MachineLearner]. (2016, June 14th). <b>CS231n Lecture 4 - Backpropagation, Neural Networks</b>. 
+		Retrieved from <a href="https://www.youtube.com/watch?v=QWfmCyLEQ8U">https://www.youtube.com/watch?v=QWfmCyLEQ8U</a>.</li>
+	</ul> 
 </body>
 </html>
 
