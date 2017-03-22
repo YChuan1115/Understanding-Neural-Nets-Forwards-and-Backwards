@@ -1,13 +1,13 @@
 # Setup
-title:        Project or Site name
-tagline:      A responsive theme for your project on GitHub Pages
+title:        Understanding Neural Nets Forwards and Backwards
+tagline:      A Walk-Through of how Neural Nets Work from the Initial Forward Pass to Backpropagation 
 baseurl:      ""
 paginate:     1
 
 # About/contact
 author:
-  name:       Author name
-  url:        http://yourhomepage.com 
+  name:       Benjamin S. Knight
+  url:        https://b-knight.github.io/
 
 # Gems
 gems:

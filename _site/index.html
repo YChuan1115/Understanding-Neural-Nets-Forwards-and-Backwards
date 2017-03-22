@@ -3,7 +3,7 @@
   
   <head>
   <meta charset="UTF-8">
-  <title>Project or Site name</title>
+  <title>Understanding Neural Nets Forwards and Backwards</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#157878">
   <link rel="stylesheet" href="/css/normalize.css">
@@ -13,8 +13,8 @@
 
   <body>
     <section class="page-header">
-  <h1 class="project-name">Project or Site name</h1>
-  <h2 class="project-tagline">A responsive theme for your project on GitHub Pages</h2>
+  <h1 class="project-name">Understanding Neural Nets Forwards and Backwards</h1>
+  <h2 class="project-tagline">A Walk-Through of how Neural Nets Work from the Initial Forward Pass to Backpropagation</h2>
   <a href="#" class="btn">View on GitHub</a>
   <a href="#" class="btn">Download .zip</a>
   <a href="#" class="btn">Download .tar.gz</a>
@@ -42,20 +42,20 @@
 
 
 
-<p> &nbsp;&nbsp;&nbsp;&nbsp; My goal in writing this is to, step-by-step, calculation-by-calculation, walk through a single epoch of a simple neural network. Recall that an epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. While the network itself is relatively simple (only three nodes), our discussion will be anything but. Our first objective is to elaborate in detail a single forward pass of the model. The next task involves a bit of calculus - one pass of backwards propagation and the derivation of a gradient from which we calculate a new array of weights for the network. Later on, we will delve into what exactly we mean by a 'gradient,' and how it is calculated. However, before anything else, we need an example model - so let's create one now. </p> 
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My goal in writing this is to, step-by-step, calculation-by-calculation, walk through a single epoch of a simple neural network. Recall that an epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. While the network itself is relatively simple (only three nodes), our discussion will be anything but. Our first objective is to elaborate in detail a single forward pass of the model. The next task involves a bit of calculus - one pass of backwards propagation and the derivation of a gradient from which we calculate a new array of weights for the network. Later on, we will delve into what exactly we mean by a 'gradient,' and how it is calculated. However, before anything else, we need an example model - so let's create one now. </p> 
 
 <h4> One Forward Pass Across a 'Simple' Neural Network </h4>
 
-<p> &nbsp;&nbsp;&nbsp;&nbsp; Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. </p> 
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. </p> 
 
 
 <p align="center"><b>Figure 1: An Example Neural Net</b></p>
 
 <p align="center">
-<img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/blob/gh-pages/_site/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
+<img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
 </p>
 
-<p> &nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
 
 <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
 <p align="center">
@@ -63,8 +63,8 @@
 </p>
 <br>
 
-### What is a Gradient?
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The purpose of backwards propagation is to enable us to train the model - typically with some version of gradient descent. To understand how gradient descent is accomplished, it is helpful to know what a gradient is. Below is a visualization of what an error gradient would look like with two variables. In deriving the error gradient, our variables are referred to as 'edges' - the connections between nodes.
+<h4> What is a Gradient? </h4>
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The purpose of backwards propagation is to enable us to train the model - typically with some version of gradient descent. To understand how gradient descent is accomplished, it is helpful to know what a gradient is. Below is a visualization of what an error gradient would look like with two variables. In deriving the error gradient, our variables are referred to as 'edges' - the connections between nodes. </p>
 
 <p align="center"><b>Figure 2: A Three Dimensional Visualization of Gradient Descent</b></p>
 <p align="center">
@@ -125,7 +125,7 @@ For those wanting additional detail, I highly recommend [this](https://www.khana
 
 
       <footer class="site-footer">
-  <span class="site-footer-owner"><a href="">Project or Site name</a> is maintained by <a href="http://yourhomepage.com">Author name</a>.</span>
+  <span class="site-footer-owner"><a href="">Understanding Neural Nets Forwards and Backwards</a> is maintained by <a href="https://b-knight.github.io/">Benjamin S. Knight</a>.</span>
   <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
 </footer>
 
