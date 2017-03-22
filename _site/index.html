@@ -29,7 +29,11 @@
   <h1>Blog Posts</h1>
   <ul class="posts">
     
-      <li><span>21 Mar 2017</span> &raquo; <a href="/Understanding-Neural-Nets-Forwards-and-Backwards//jekyll/update/2017/03/21/welcome-to-jekyll.html">Welcome to Jekyll!</a></li>
+      <li><span>05 Mar 2017
+          </span> &raquo; 
+          <a href="/Understanding-Neural-Nets-Forwards-and-Backwards//jekyll/update/2017/03/21/welcome-to-jekyll.html">
+          </a>
+      </li>
     
   </ul>
 </div>
@@ -40,13 +44,9 @@
 
 
 
+&nbsp;&nbsp;&nbsp;&nbsp; <p> My goal in writing this is to, step-by-step, calculation-by-calculation, walk through a single epoch of a simple neural network. Recall that an epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. While the network itself is relatively simple (only three nodes), our discussion will be anything but. Our first objective is to elaborate in detail a single forward pass of the model. The next task involves a bit of calculus - one pass of backwards propagation and the derivation of a gradient from which we calculate a new array of weights for the network. Later on, we will delve into what exactly we mean by a 'gradient,' and how it is calculated. However, before anything else, we need an example model - so let's create one now. </p> 
 
-# Understanding Understanding Neural Nets Forwards and Backwards
-**Benjamin S. Knight**, March 5th, 2017
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  My goal in writing this is to, step-by-step, calculation-by-calculation, walk through a single epoch of a simple neural network. Recall that an epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. While the network itself is relatively simple (only three nodes), our discussion will be anything but. Our first objective is to elaborate in detail a single forward pass of the model. The next task involves a bit of calculus - one pass of backwards propagation and the derivation of a gradient from which we calculate a new array of weights for the network. Later on, we will delve into what exactly we mean by a 'gradient,' and how it is calculated. However, before anything else, we need an example model - so let's create one now.  
-
-### One Forward Pass Across a 'Simple' Neural Network
+<h4> One Forward Pass Across a 'Simple' Neural Network </h4>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function.  
 
