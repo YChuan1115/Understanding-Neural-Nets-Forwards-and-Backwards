@@ -3,18 +3,18 @@
   
   <head>
   <meta charset="UTF-8">
-  <title></title>
+  <title>Project or Site name</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#157878">
-  <link rel="stylesheet" href="/Understanding-Neural-Nets-Forwards-and-Backwards//css/normalize.css">
+  <link rel="stylesheet" href="/css/normalize.css">
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="/Understanding-Neural-Nets-Forwards-and-Backwards//css/cayman.css">
+  <link rel="stylesheet" href="/css/cayman.css">
 </head>
 
   <body>
     <section class="page-header">
-  <h1 class="project-name"></h1>
-  <h2 class="project-tagline"></h2>
+  <h1 class="project-name">Project or Site name</h1>
+  <h2 class="project-tagline">A responsive theme for your project on GitHub Pages</h2>
   <a href="#" class="btn">View on GitHub</a>
   <a href="#" class="btn">Download .zip</a>
   <a href="#" class="btn">Download .tar.gz</a>
@@ -26,12 +26,11 @@
 <html>
 <head>
 <div id="home">
-  <h1>Blog Posts</h1>
   <ul class="posts">
     
       <li><span>05 Mar 2017
           </span> &raquo; 
-          <a href="/Understanding-Neural-Nets-Forwards-and-Backwards//jekyll/update/2017/03/21/welcome-to-jekyll.html">
+          <a href="">
           </a>
       </li>
     
@@ -48,14 +47,15 @@
 
 <h4> One Forward Pass Across a 'Simple' Neural Network </h4>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function.  
+&nbsp;&nbsp;&nbsp;&nbsp; <p> Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. </p> 
+
 
 <p align="center"><b>Figure 1: An Example Neural Net</b></p>
-<p align="center">
-<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Establishing_Model_Gif.gif" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer." width="80%" height="80%">
-</p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  
+
+<img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/master/Images_and_GIFs/Establishing_Model_Gif.gif" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer." style="width:80%;height:80%;">
+
+&nbsp;&nbsp;&nbsp;&nbsp; <p> When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
 
 <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
 <p align="center">
@@ -125,7 +125,7 @@ For those wanting additional detail, I highly recommend [this](https://www.khana
 
 
       <footer class="site-footer">
-  <span class="site-footer-owner"><a href=""></a> is maintained by <a href=""></a>.</span>
+  <span class="site-footer-owner"><a href="">Project or Site name</a> is maintained by <a href="http://yourhomepage.com">Author name</a>.</span>
   <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
 </footer>
 
