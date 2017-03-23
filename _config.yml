@@ -6,7 +6,7 @@ baseurl:      ""
 paginate:     1
 
 # About/contact
-author:
+author:  
   name:       Benjamin S. Knight
   url:        https://b-knight.github.io/
 
