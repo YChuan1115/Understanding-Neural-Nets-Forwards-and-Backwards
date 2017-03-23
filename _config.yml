@@ -1,6 +1,5 @@
 # Setup
-title:        Understanding Neural Nets 
-              Forwards and Backwards
+title:        Understanding Neural Nets Forwards and Backwards
 tagline:      A Walk-Through of how Neural Nets Work from the Forward Pass to Backpropagation 
 baseurl:      ""
 paginate:     1
