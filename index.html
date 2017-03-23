@@ -4,6 +4,13 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
 ---
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <script type="text/javascript" 
+    async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script> 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
   <body>
   <h4> March 21st, 2017</h4>
 
@@ -11,14 +18,23 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
 
   <h4> One Forward Pass Across a 'Simple' Neural Network </h4>
 
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post I will walk step-by-step through a single epoch of a simple, three-node neural network. An epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. For our purposes, the epoch will consist of a single observation. Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. </p> 
-
-
-  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
-
   <p align="center">
   <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
   </p>
+  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
+
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post I will walk step-by-step through a single epoch of a simple, three-node neural network. An epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. For our purposes, the epoch will consist of a single observation. Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. The sigmoid function takes the form of the below expression and serves to rescale the results from the neural net so that they reside between zero and one.
+  </p> 
+
+  <div>
+    $$
+    \displaystyle\frac{\text{Imports}^r_{t}}{GDP_{it}} \hphantom{aaaaa} 
+    \displaystyle\frac{\text{Imports}^p_{t}}{GDP_{it}} \hphantom{aaaaa} 
+    \displaystyle\frac{\text{Exports}^r_{t}}{GDP_{it}} \hphantom{aaaaa} 
+    \displaystyle\frac{\text{Exports}^p_{t}}{GDP_{it}} \hphantom{aaaaa} 
+    $$
+  </div>
+
 
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; When initializing a neural net, the weights are typically initialized to small random values chosen from a zero-mean Gaussian distribution with a standard deviation of about 0.01 ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. Our final step is the activation function - in this case, a sigmoid function.  </p>
 
