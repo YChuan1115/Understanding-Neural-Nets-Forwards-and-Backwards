@@ -38,11 +38,10 @@
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My goal in writing this is to help foster a better intuition into how neural nets operate. Neural nets have proved revolutionary in the field of artificial intelligence. While neural nets can quickly assume truly daunting levels of complexity, their underlying mechanics are relatively straightforward. A neural network is an ensemble of nodes and the connections between them (also referred to here as 'edges'). These nodes are assembled into layers, with an input layer recieving an input corresponding to an observation (e.g. "Is the pixel red? [yes/no]") and the final layer producing an output (e.g. "Probability that the image is that of an apple: 88%"). These networks may be dozens of layers deep or more, hence the term 'deep-learning.' The stage where information permeates the network, is weighted and reweighted, and is then ultimately used to generate an output is referred to as a 'forward pass.' Of course, even the most well-designed neural net won't get things right on the first try. The net needs exposure to additional information in order to learn. This learning mechanism takes the form of updates to the connections between the nodes. If a connection is conveying information that contributes greatly to the final prediction, then an incorrect categorization will result in this connection being penalized heavily - essentially preventing the connection from conveying information from future observations. The process by which the error signal is generated and then used to update the network's connections is reffered to as 'back propagation,' in that the error signal is propagated backwards through the network from finish to start. </p> 
 
   <h4> One Forward Pass Across a 'Simple' Neural Network </h4>
-
+  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
   <p align="center">
   <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
   </p>
-  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
 
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post I will walk step-by-step through a single epoch of a simple, three-node neural network. An epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. For our purposes, the epoch will consist of a single observation. Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. The sigmoid function takes the form of the below expression and serves to rescale the results from the neural net so that they reside between zero and one. For classification problems of a True/False nature, a value of 0.49 is far more tractable that -37.4. 
   </p> 
@@ -55,22 +54,39 @@
 
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In building a neural net, we typically begin by initializing the weights with small random values chosen from a zero-mean Gaussian distribution (a standard deviation of about 0.01 is often preferred ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. We conclude the forward pass by applying sigmoid function, thus yielding our initial prediction of 0.21.</p>
 
+  <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
   <p align="center">
   <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Forward_Pass_GIF.gif"  width="738" height="360" alt="A GIF showing one forward pass of the neural network.">
   </p>
-  <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
 
   <h4> What is a Gradient? </h4>
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An initial forward pass of our model has yieled a value of 0.21 versus the corect value is 1. The purpose of backwards propagation is to enable us to train the model - typically with some version of gradient descent. To understand how gradient descent is accomplished, it is helpful to know what a gradient is. Below is a visualization of what an error gradient would look like with two variables. In deriving the error gradient, our variables are referred to as 'edges' - the connections between nodes. </p>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An initial forward pass of our model generates a value of 0.21 versus the corect value is 1. The purpose of backwards propagation is to enable us to train the model - typically with some version of gradient descent. To understand how gradient descent is accomplished, it is helpful to know what a gradient is. Below is a visualization of what an error gradient would look like with two variables. In deriving the error gradient, our variables are referred to as 'edges' - the connections between nodes. </p>
 
+ <p align="center"><b>Figure 3: A Three Dimensional Visualization of Gradient Descent</b></p>
   <p align="center">
   <img src="https://github.com/b-knight/Understanding-Error-Signal-Propagation-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Gradient.png" alt="A Three Dimensional Visualization of Gradient Descent Courtesy of Zoran Vrhovski.">
   </p>
   <p align="center">Source: <a href="https://www.youtube.com/watch?v=wobhkK0h1wc">Zoran Vrhovski</a> May 29th, 2012</p>
-  <p align="center"><b>Figure 3: A Three Dimensional Visualization of Gradient Descent</b></p>
+ 
 
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A neural net can be thought of as one, very large differentiable equation with many variables. To better understand any complex system with many inputs, it is often useful to specify a relationship between the outcome variable and a specific variable of interest. Mathmatically, we do this by taking the partial derivative of the equation with respect to the variable of interest. When taking the partial derivative, any component of the expression that is not somehow associated with the variable of interest is effectively set to zero. Note in the figure below how different elements drop out of relevance based on what variable we are taking the partial derivative with respect to. </p>
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For those wanting additional detail, I highly recommend [this](https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/gradient) series of video lectures from Kahn Academy. </p>
+
+ <p align="center"><b>Figure 4: Calculating the Propagation of the Error Signal </b></p>
+  <p align="center">
+  <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/BackProp.png" 
+       width="492" height="268" alt="A diagram establishing the variables used in backpropagation.">
+  </p>
+
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We previously calculated an output value of 0.21 versus the actuaal value of 1. We can subtract the estimated value from the actual value to yield an error of size 0.79, but how do we use this information to train our network. To illustrate this process of backpropagation I will refer to the above diagram which contains four elements. We have two nodes, <i>i</i> and <i>j</i>. <i>i</i> is located in the penultimate layer - a hidden layer, where as <i>j</i> is in the output layer. Next, we have the outputs of these two nodes - <i>y<sub>i</sub></i> for node <i>i</i> and <i>y<sub>j</sub></i> for node <i>j</i> respectively. Finally, we have <i>z<sub>j</sub></i> which is the sum of all of the inputs into node <i>j</i>.</p>
+   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+
+ <div>
+    $$
+    \sigma(x) = \displaystyle\frac{1}{1+e^{-x}}
+    $$
+  </div>
+
 
   <h4> Calculating the Gradient </h4>
 
