@@ -15,15 +15,9 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   <h2> Benjamin S. Knight</h2>
   <h4> March 5th, 2017</h4>
 
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My goal in writing this is to help foster a better intuition into how neural nets operate. Neural nets have proved revolutionary in the field of artificial intelligence. While neural nets can quickly assume truly daunting levels of complexity, their underlying mechanics are relatively straightforward. A neural network is an ensemble of nodes and the connections between them (also referred to here as 'edges'). These nodes are assembled into layers, with an input layer recieving an input corresponding to an observation (e.g. "Is the pixel red? [yes/no]") and the final layer producing an output (e.g. "Probability that the image is that of an apple: 88%"). These networks may be dozens of layers deep or more, hence the term 'deep-learning.' The stage where information permeates the network, is weighted and reweighted, and is then ultimately used to generate an output is referred to as a 'forward pass.' Of course, even the most well-designed neural net won't get things right on the first try. The net needs exposure to additional information in order to learn. This learning mechanism takes the form of updates to the connections between the nodes. If a connection is conveying information that contributes greatly to the final prediction, then an incorrect categorization will result in this connection being penalized heavily - essentially preventing the connection from conveying information from future observations. The process by which the error signal is generated and then used to update the network's connections is reffered to as 'back propagation,' in that the error signal is propagated backwards through the network from finish to start. </p> 
-
-  <h4> One Forward Pass Across a 'Simple' Neural Network </h4>
-  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
-  <p align="center">
-  <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
-  </p>
-
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post I will walk step-by-step through a single epoch of a simple, three-node neural network. An epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. For our purposes, the epoch will consist of a single observation. Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. The sigmoid function takes the form of the below expression and serves to rescale the results from the neural net so that they reside between zero and one. For classification problems of a True/False nature, a value of 0.49 is far more tractable that -37.4. 
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; My goal in writing this is to help foster a better intuition into how neural nets operate. Neural nets have proved revolutionary in pattern inference - for instance, enabling computers to identify and classify images with accuracy that rivals or exceeds that of humans. While neural nets can quickly assume truly daunting levels of complexity, they can be broken down into component parts the underlying mechanics of which are relatively straightforward. A neural network is an ensemble of nodes and the connections between them (also referred to here as 'edges'). These nodes are assembled into layers, with an input layer recieving an input corresponding to an observation (e.g. "Is the pixel red? [yes/no]") and the final layer producing an output (e.g. "Probability that the image is that of an apple: 88%"). These networks may be dozens of layers deep or more, hence the term 'deep-learning.' As information traverses the network, each connection either amplifies or weakens the information passed through it via a system of weights. This stage where information permeates the network, is weighted and reweighted, and is then ultimately used to generate an output is referred to as a 'forward pass.' <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Of course, even the most well-designed neural net won't get things right on the first try. The net needs exposure to additional information in order to learn. This learning mechanism takes the form of updates to the weights assigned to the connections between each node. In the event of a mistake, connections with weights that amplify the flow of information will be penalized more heavily - essentially obstructing that information pathway for subsequent forward passes. The process by which the error signal is generated and then used to update the network's connections is reffered to as 'back propagation,' in that the error signal is propagated backwards through the network from finish to start. <br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this post I will walk step-by-step through a single epoch of a simple, three-node neural network. An epoch is defined as one iteration of the model that utilizes the entirety of the avialable training data. For our purposes, the epoch will consist of a single observation. Our hypothetical network has two input variables 'X1' and 'X2', one output variable 'Y', and a training data set that is comprised of a single observation [8, -4]. The interior of the network is comprised of two layers - one hidden layer of two nodes followed by a single node output layer. We can unpack this network further by visualizing the weights as grey squares. Lastly, the activation function that preceeds the output 'Y' is a sigmoid function. The sigmoid function takes the form of the below expression and serves to rescale the results from the neural net so that they reside between zero and one. For classification problems of a True/False nature, a value of 0.49 is far more tractable that -37.4. 
   </p> 
 
   <div>
@@ -32,6 +26,14 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     $$
   </div>
 
+  </p> 
+
+  <p align="center"><b>Figure 1: An Example Neural Net</b></p>
+  <p align="center">
+  <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/Establishing_Model_Gif.gif"  width="768" height="432" alt="A GIF showing the construction of a 2-inputs, 1-output, 3-node neural net with a sigmoid activation function in the output layer.">
+  </p>
+
+  <h4> One Forward Pass Across a Neural Network </h4>
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In building a neural net, we typically begin by initializing the weights with small random values chosen from a zero-mean Gaussian distribution (a standard deviation of about 0.01 is often preferred ([Hinton](http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf), 2010, p.9). We start the forward pass by multiplying our initial inputs ('X1' and 'X2') times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of H1 times its weight, multiplying the output of H2 times its weight, and summing the two products to create the value associated with the output node 'O1'. We conclude the forward pass by applying sigmoid function, thus yielding our initial prediction of 0.21.</p>
 
   <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
@@ -52,7 +54,9 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A neural net can be thought of as one, very large differentiable equation with many variables. To better understand any complex system with many inputs, it is often useful to specify a relationship between the outcome variable and a specific variable of interest. Mathmatically, we do this by taking the partial derivative of the equation with respect to the variable of interest. When taking the partial derivative, any component of the expression that is not somehow associated with the variable of interest is effectively set to zero. Note in the figure below how different elements drop out of relevance based on what variable we are taking the partial derivative with respect to. </p>
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For those wanting additional detail, I highly recommend [this](https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/gradient) series of video lectures from Kahn Academy. </p>
 
- <p align="center"><b>Figure 4: Calculating the Propagation of the Error Signal </b></p>
+  <h4> Calculating the Gradient </h4>
+
+  <p align="center"><b>Figure 4: Calculating the Propagation of the Error Signal </b></p>
   <p align="center">
   <img src="https://github.com/b-knight/Understanding-Neural-Nets-Forwards-and-Backwards/raw/gh-pages/Images_and_GIFs/BackProp.png" 
        width="492" height="268" alt="A diagram establishing the variables used in backpropagation.">
@@ -68,13 +72,12 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     $$
   </div>
 
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Here the overall error signal generated by the entirety of the neural net is represented as <b><i>E</i></b>. To calculate this value, let's assign the true value of output node <b><i>j</i></b> to <b><i>t<sub>j</sub></i></b>. Taking <b><i>y<sub>j</sub></i></b> and <b><i>t<sub>j</sub></i></b>together, we see that the contents of the parentheses is the difference between the predicted value and the actual value. We are interested in the absolute size of the the error, and so we square the difference. Taking the absolute value would also yield the desired value. However, absolute values are not differentiable - a prerequiste of gradient descent. Next, we sum these squared differences for all of the output nodes. Lastly, we add one half to the loss function for the sake of convenience when we take the derivative. <br>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Here the overall error signal generated by the entirety of the neural net is represented as <b><i>E</i></b>. To calculate this value, let's assign the true value of output node <b><i>j</i></b> to <b><i>t<sub>j</sub></i></b>. Taking <b><i>y<sub>j</sub></i></b> and <b><i>t<sub>j</sub></i></b> together, we see that the contents of the parentheses is the difference between the predicted value and the actual value. We are interested in the absolute size of the the error, and so we square the difference. Taking the absolute value would also yield the desired value. However, absolute values are not differentiable - a prerequiste of gradient descent. Next, we sum these squared differences for all of the output nodes. Lastly, we add one half to the loss function for the sake of convenience when we take the derivative. <br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we have a general error signal, we need to apply it to all of the nodes in the output layer. In other words, we need a way of capturing the extent to which a change in the output of node <b><i>y<sub>j</sub></i></b> impacts the overall level of error, <b><i>E</i></b>. Here is where we take the derivative - specifically the partial derivative with respect to each output node as shown below.</p>
 
   <div>
     $$\begin{eqnarray} 
-    \frac{\partial E}{\partial y_j} &=& -(t_j -y_j)     \nonumber \\
-    &=& -(1 - 0.21)\nonumber \\
+    \frac{\partial E}{\partial y_j} = -(t_j -y_j) \phantom{aaaa} \rightarrow \phantom{aaaa}    \frac{\partial E}{\partial y_j} &=& -(1 - 0.21)\nonumber \\
     &=& -0.79 \nonumber
     \end{eqnarray}$$
   </div>
@@ -83,18 +86,22 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
 
   <div>
     $$\begin{eqnarray} 
-    \frac{\partial E}{\partial z_j} &=& \displaystyle\frac{dy_j}{dz_j} \displaystyle\frac{\partial E}{\partial y_j}     \nonumber \\
-    &=& y_j(1-y_j)\displaystyle\frac{\partial E}{\partial y_j} \nonumber \\
-    &=& (-1.28)(1+1.28)(-0.79) \nonumber \\
+    \frac{\partial E}{\partial z_j} = \displaystyle\frac{dy_j}{dz_j} \displaystyle\frac{\partial E}{\partial y_j} \phantom{aaaaaaaaaaaaaaaa|aa}    \nonumber \\
+    = y_j(1-y_j)\displaystyle\frac{\partial E}{\partial y_j} \phantom{aaaa} \rightarrow \phantom{aaaa} \frac{\partial E}{\partial z_j} &=& (-1.28)(1+1.28)(-0.79) \nonumber \\
     &=& 2.3 \nonumber \\
     \end{eqnarray}$$
   </div>
 
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In other words, a change in the amount of total error <b><i>E</i></b> with respect to the inputs to node <b><i>j</i></b> is equal to the change in the value of the output of node <b><i>j</i></b> with respect to change in all of node <b><i>j</i></b>'s inputs multiplied by the change in <b><i>E</i></b> with respect to change with respect to the output of node <b><i>j</i></b>, <b><i>y<sub>j</sub></i></b>. Because the term <b><i>z<sub>j</sub></i></b> capatures an array of values, its partial derivative is written with a cursive 'd' whereas the other partial derivatives are designated with the more typical Greek  &#948. The resulting value ends up being equal to the output of node <b><i>j</i></b> times one minus the output of node <b><i>j</i></b> all times the partial derivative of the error term <b><i>E</i></b> with respect to the output of node <b><i>j</i></b>.</p>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In other words, the change in the amount of total error <b><i>E</i></b> with respect to the sum of inputs to node <b><i>j</i></b> is equal to the change in the the output of node <b><i>j</i></b> with respect to change in the sum of node <b><i>j</i></b>'s inputs multiplied by the change in <b><i>E</i></b> with respect to the output of node <b><i>j</i></b>. Because the term <b><i>z<sub>j</sub></i></b> captures an array of values, its partial derivative is written with a cursive 'd' whereas the other partial derivatives are designated with the more typical Greek  &#948. The resulting value ends up being equal to the output of node <b><i>j</i></b> times one minus the output of node <b><i>j</i></b> all times the partial derivative of the error term <b><i>E</i></b> with respect to the output of node <b><i>j</i></b>.<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Moving backwards from the output layer to the hidden layer, we need to transform node <b><i>j</i></b>'s error signal the error to apply to the output of node <b><i>i</i></b>. In other words, we will use the partial derivative of <b><i>E</i></b> with respect to <b><i>z<sub>j</sub></i></b> to calculate the partial derivative of <b><i>E</i></b> with respect to <b><i>y<sub>i</sub></i></b>.</p>
 
+  <div>
+    $$\begin{eqnarray} 
+    \frac{\partial E}{\partial y_i} = \displaystyle\sum_j\displaystyle\frac{dz_j}{dy_i} \displaystyle\frac{\partial E}{\partial z_j}    \nonumber \\
+     = \displaystyle\sum_jw_{ij}\frac{\partial E}{\partial z_j} \phantom{aaaa} \rightarrow \phantom{aaaa} \nonumber \\
+    \end{eqnarray}$$
+  </div>
 
-
-  <h4> Calculating the Gradient </h4>
 
   
   
@@ -103,12 +110,12 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
 
   <h3> References </h3>
   	<ul style="list-style-type:disc">
-  		<li> Hinton, Geoffrey. [Artificial Intelligence Courses]. (2013, November 4th). <b>The Backpropagation Algorithm</b>b>. 
-  		Retrieved from <a href="https://www.youtube.com/watch?v=xfPz92B0rv8">https://www.youtube.com/watch?v=xfPz92B0rv8</a>.</li>
+  		<li> Hinton, Geoffrey. [Artificial Intelligence Courses]. (2013, November 4th). <b>The Backpropagation Algorithm</b>. 
+  		<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Retrieved from <a href="https://www.youtube.com/watch?v=xfPz92B0rv8">https://www.youtube.com/watch?v=xfPz92B0rv8</a>.</li>
   		<li> Hinton, Geoffrey. (2010). A Practical Guide to Training Restricted Boltzmann Machines. 
-  		Retrieved from <a href="http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf">http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf</a>.</li>
+  		<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Retrieved from <a href="http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf">http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf</a>.</li>
   		<li> Karpathy, Andrej. [MachineLearner]. (2016, June 14th). <b>CS231n Lecture 4 - Backpropagation, Neural Networks</b>. 
-  		Retrieved from <a href="https://www.youtube.com/watch?v=QWfmCyLEQ8U">https://www.youtube.com/watch?v=QWfmCyLEQ8U</a>.</li>
+  		<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Retrieved from <a href="https://www.youtube.com/watch?v=QWfmCyLEQ8U">https://www.youtube.com/watch?v=QWfmCyLEQ8U</a>.</li>
   	</ul> 
   </body>
 </html>
