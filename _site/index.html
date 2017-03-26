@@ -162,7 +162,7 @@
   <div>
     $$\begin{eqnarray} 
     \frac{\partial E}{\partial W_{H_1\rightarrow\sigma}} &=& H_1    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (-0.8)(0.0217) \phantom{aa}  \rightarrow \phantom{aa} -0.01736\\
-    \frac{\partial E}{\partial W_{H_2\rightarrow\sigma}} &=& H_1    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (1.2)(0.0217) \phantom{aaa}  \rightarrow \phantom{aa} 0.02604 \nonumber\\
+    \frac{\partial E}{\partial W_{H_2\rightarrow\sigma}} &=& H_2    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (1.2)(0.0217) \phantom{aaa}  \rightarrow \phantom{aa} 0.02604 \nonumber\\
     \end{eqnarray}$$
   </div>
   <p> Now that we have all of the error derivatives, we can employ gradient descent. In adjusting the weights for the output layer (<b><i>W<sub>2a</sub></i></b>, <b><i>W<sub>2b</sub></i></b>), we multiply together (1.) the learning rate paramater - <i>eta</i> (2.) the output unit error, and (3.) the hidden unit activation value. Let us assign a value of 0.5 for <i>eta</i>. For the hidden unit activation value, recall that
