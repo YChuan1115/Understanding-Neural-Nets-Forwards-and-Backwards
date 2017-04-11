@@ -27,7 +27,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     $$
   </div>
 
-  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The sigmoid function serves to rescale the results from the neural net so that they reside between zero and one. For classification problems of a True/False nature, a value of 0.49 is far more tractable that -37.4. With all of the elements in place, our neural network take the structure shown in Figure 1.</p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The sigmoid function serves to rescale the results from the neural net so that they reside between zero and one. For classification problems of a True/False nature, a value of 0.49 is far more tractable that -37.4. With all of the elements in place, our neural network takes the structure shown in Figure 1.</p>
 
   <a name="Figure 1"></a>
   <p align="center"><b>Figure 1: An Example Neural Net</b></p>
@@ -36,7 +36,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   </p>
 
   <p>Before we can turn the crank of our neural net, we need to assign weights to the connections. We typically begin by initializing the weights with small random values chosen from a zero-mean Gaussian distribution. A standard deviation of about 0.01 is recommended (<a href="http://www.csri.utoronto.ca/~hinton/absps/guideTR.pdf">Hinton, 2010</a>).<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We start the forward pass by multiplying our initial inputs (<b><i>X<sub>1</sub></b></i> and <b><i>X<sub>2</sub></b></i>) times their respective weights, and then summing the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of <b><i>H<sub>1</sub></b></i> times its weight, multiplying the output of <b><i>H<sub>2</sub></b></i> times its weight, and summing the two products to create the value associated with the output node <b><i>O<sub>1</sub></b></i>. We conclude the forward pass by applying the sigmoid function, thus yielding our initial prediction of 0.21.</p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We start the forward pass by multiplying our initial inputs (<b><i>X<sub>1</sub></b></i> and <b><i>X<sub>2</sub></b></i>) times their respective weights, and then sum the results. Next, we repeat the process for the nodes in the hidden layer - multiplying the output of <b><i>H<sub>1</sub></b></i> times its weight, multiplying the output of <b><i>H<sub>2</sub></b></i> times its weight, and summing the two products to create the value associated with the output node <b><i>O<sub>1</sub></b></i>. We conclude the forward pass by applying the sigmoid function, thus yielding our initial prediction of 0.21.</p>
 
   <p align="center"><b>Figure 2: Randomly Assigning Weights and Executing the Forward Pass</b></p>
   <p align="center">
@@ -46,7 +46,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; An initial forward pass of our model generates a value of 0.21. However, the classification is incorrect (as we would expect given that the weights were randomly assigned). If our training set shows that the actual value for that obseration is 1, how can we leverage that information to improve our model? Here we turn to Calculus. By propagating the error signal backwards from the output layer to the input layer, we can create an error gradient from which we can optimize the weights in such a way as to minimize the error. Because we are descending the gradient as we appoach the point of minimum error, we refer to this process as gradient descent.</p><br>
 
   <h3> II. Gradient Descent </h3>
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If we wanted to plot the relationship between two variables <b><i>X</b></i> and <b><i>Y</b></i>, we might start by drawing a two-dimensional plot. If we went a step further and wanted to know what values of <b><i>X</b></i> correspond with the largest possible change in the values of <b><i>Y</b></i>, then we might instead show the rate of chage in <b><i>Y</b></i> with respect to <b><i>X</b></i> by plotting the derivative. If we were interested in the relationship between rates of change among not just <b><i>X</b></i> and <b><i>Y</b></i>, but also between <b><i>Z</b></i> and <b><i>Y</b></i>, then we would need a three-dimensional plot of the derivatives like the one shown below.</p>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If we wanted to plot the relationship between two variables <b><i>X</b></i> and <b><i>Y</b></i>, we might start by drawing a two-dimensional plot. If we went a step further and wanted to know what values of <b><i>X</b></i> correspond with the largest possible change in the value of <b><i>Y</b></i>, then we might instead show the rate of chage in <b><i>Y</b></i> with respect to <b><i>X</b></i> by plotting the derivative. If we were interested in the relationship between rates of change among not just <b><i>X</b></i> and <b><i>Y</b></i>, but also between <b><i>Z</b></i> and <b><i>Y</b></i>, then we would need a three-dimensional plot of the derivatives like the one shown below.</p>
 
  <p align="center"><b>Figure 3: A Three Dimensional Visualization of Gradient Descent</b></p>
   <p align="center">
@@ -58,7 +58,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   <p align="center">Source: <a href="https://www.youtube.com/watch?v=wobhkK0h1wc">Zoran Vrhovski</a> May 29th, 2012</p>
  
   <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; A <a href="https://en.wikipedia.org/wiki/Gradient">gradient</a> is a representation of a derivative - a rate of change - projected across <i>n</i> dimensions. With only three variables, a gradient can still be represented visually. However, the number of variables generated by a neural net - the weights - can number in the millions. In this context, a more practical representation of a gradient is as an array of partial derivatives, i.e. the rate of change in the error signal <b><i>E</i></b> with respect to weight <b><i>W<sub>1</sub></b></i>, the rate of change in <b><i>E</i></b> with respect to weight <b><i>W<sub>2</sub></b></i>, and so forth. Thus, a neural net can be thought of as one, very large differentiable equation with many variables. For those wanting additional detail, I highly recommend the excellent series of video lectures from <a href="https://www.khanacademy.org/math/multivariable-calculus/multivariable-derivatives/gradient-and-directional-derivatives/v/gradient"> Kahn Academy</a>.<br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Once we calculate the error gradient, we use it to adjust the weights in the neural net via gradient descent. In gradient descent we calculate an amount, <b>&#916;</b> by which to change each weight by. To calculate <b>&#916;</b> we take the error derivative associated with that node, weigh it by the absolute input passing to it from the preceding node, and multiply the result by the learning rate, <b>&#951;</b>.<br> 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Once we calculate the error gradient, we use it to adjust the weights in the neural net via gradient descent. In gradient descent we calculate an amount - <b>&#916;</b>, by which to change each weight by. To calculate <b>&#916;</b> we take the error derivative associated with that node, weigh it by the absolute input passing to it from the preceding node, and multiply the result by the learning rate, <b>&#951;</b> (pronounced 'ee-tah').<br> 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; As we feed the neural net new and different information, the exact shape of the error gradient will naturally change. For this reason, smaller values of <b>&#951;</b> tend to perform better. In other words, it is better to take more, smaller steps in a direction that is generally correct as opposed to taking a very large step only to realize that the path was less than optimal.</p><br>  
  
   <h3> III. Calculating the Error Gradient </h3>
@@ -80,7 +80,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
   </div>
 
   <p> Here the overall error signal generated by the entirety of the neural net is represented as <b><i>E</i></b>. To calculate this value, let's assign the true value of output node <b><i>j</i></b> to <b><i>t<sub>j</sub></i></b>. Taking <b><i>y<sub>j</sub></i></b> and <b><i>t<sub>j</sub></i></b> together, we see that the contents of the parentheses is the difference between the predicted value and the actual value. We are interested in the absolute size of the the error, and so we square the difference. Taking the absolute value would also yield the desired value. However, absolute values are not differentiable - a prerequiste of gradient descent. Next, we sum these squared differences for all of the output nodes. Lastly, we multiply the results by one half for the sake of convenience when we take the derivative. <br>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we have a general error signal, we need to apply it to all of the nodes in the output layer. In other words, we need a way of capturing the extent to which a change in the output of node <b><i>y<sub>j</sub></i></b> impacts the overall level of error, <b><i>E</i></b>. For this reason, we take the partial derivative of the loss function with respect to the output node as shown below.</p>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Now that we have a general error signal, we need to apply it to all of the nodes in the output layer. In other words, we need a way of capturing the extent to which a change in the output of node <b><i>j</i></b> impacts the overall level of error, <b><i>E</i></b>. For this reason, we take the partial derivative of the loss function with respect to the output node as shown below.</p>
 
   <div>
     $$\begin{eqnarray} 
@@ -97,7 +97,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     \end{eqnarray}$$
   </div>
 
-  <p> The change in the amount of error signal <b><i>E</i></b> with respect to the inputs to node <b><i>j</i></b> is equal to the change in the the output of node <b><i>j</i></b> with respect to change in the inputs to node <b><i>j</i></b> all multiplied by the change in <b><i>E</i></b> with respect to the output of node <b><i>j</i></b> (Note: Because the term <b><i>z<sub>j</sub></i></b> captures an array of values, its partial derivative is written with a cursive <b><i>d</i></b> whereas the other partial derivatives are designated with the more typical <b>&#948;</b>). The resulting value ends up being equal to the output of node <b><i>j</i></b> times one minus the output of node <b><i>j</i></b> all times the partial derivative of the error term <b><i>E</i></b> with respect to the output of node <b><i>j</i></b>.<br>
+  <p> The change in the amount of error signal <b><i>E</i></b> with respect to the inputs to node <b><i>j</i></b> is equal to the change in the the output of node <b><i>j</i></b> with respect to change in the inputs to node <b><i>j</i></b> all multiplied by the change in <b><i>E</i></b> with respect to the output of node <b><i>j</i></b> Note that because the term <b><i>z<sub>j</sub></i></b> captures an array of values, its partial derivative is written with a cursive <b><i>d</i></b> whereas the other partial derivatives are designated with the more typical <b>&#948;</b>. The resulting value ends up being equal to the output of node <b><i>j</i></b> times one minus the output of node <b><i>j</i></b> all times the partial derivative of the error term <b><i>E</i></b> with respect to the output of node <b><i>j</i></b>.<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Moving backwards from the output layer to the hidden layer, we use the error derivative for the inputs to node <b><i>j</i></b> to calculate the error derivative for the outputs of node <b><i>i</i></b>. In other words, we will use the partial derivative of <b><i>E</i></b> with respect to <b><i>z<sub>j</sub></i></b> to calculate the partial derivative of <b><i>E</i></b> with respect to <b><i>y<sub>i</sub></i></b>.</p>
 
   <div>
@@ -107,7 +107,7 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     \end{eqnarray}$$
   </div>
 
-  <p> We can interpret the above expression as follows: The change in the error with respect to the output of a node (<b><i>i</i></b>) is equal to the change in error associated with all inputs to the subsequent node (<b><i>j</i></b>) times the weight of the connection bridging the two nodes (<b><i>W</b></i><sub><b><i>i</i></b> &rarr; <b><i>j</i></b></sub>). We repeat this process for all connections between node <b><i>i</i></b> and the subsequent layer. By summing the results, we derive the total error to back propagate to node <b><i>i</i></b>.<br>
+  <p> We can interpret the above expression as follows: The change in the error with respect to the output of a node <b><i>i</i></b> is equal to the change in error associated with all inputs to the subsequent node <b><i>j</i></b> times the weight of the connection bridging the two nodes <b><i>W</b></i><sub><b><i>ij</i></b></sub>. We repeat this process for all connections between node <b><i>i</i></b> and the subsequent layer. By summing the results, we derive the total error to back propagate to node <b><i>i</i></b>.<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; We can zoom in further and see how this plays out with a particular weight.</p>
 
   <div>
@@ -117,10 +117,10 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
     \end{eqnarray}$$
   </div>
 
-  <p>The change in error with respect to a change in some weight <b><i>W</b></i><sub><b><i>i</i></b> &rarr; <b><i>j</i></b></sub> is equal to the change in error with respect to the inputs to the subsequent layer multiplied by the input itself.</p><br>
+  <p>The change in error with respect to a change in some weight <b><i>W</b></i><sub><b><i>ij</i></b></sub> is equal to the change in error with respect to the inputs to the subsequent layer multiplied by the input itself.</p><br>
 
   <h3> IV. Tying it all Together </h3>
-  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this section I apply the backpropagation logic discussed in the previous section, and apply it to the neural net shown in <a href="#Figure 1">Figure 1</a>. Based on the notation in Figure 1, input variables are designated as <b><i>X</b></i>, while hidden layer nodes and output layer nodes are represented as <b><i>H</b></i> and <b><i>O</b></i> respectively. Figure 5 illustrates this process of backpropagation, and gradient derivation and descent with a learning rate of <b>&#951;</b> = 0.5.</p>
+  <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; In this section I apply the backpropagation logic discussed in the previous section, and apply it to the neural net shown in <a href="#Figure 1">Figure 1</a>. Based on the notation in Figure 1, input variables are designated as <b><i>X</b></i>, while hidden layer nodes and output layer nodes are represented as <b><i>H</b></i> and <b><i>O</b></i> respectively. Figure 5 illustrates this process of backpropagation, gradient derivation, and descent with a learning rate of <b>&#951;</b> = 0.5.</p>
 
   <p align="center"><b>Figure 5: Executing Backpropagation and Gradient Descent </b></p>
   <p align="center">
@@ -150,32 +150,32 @@ title: {{ Understanding Neural Nets Forwards and Backwards }}
    <p> We now have the error derivative for the inputs to the sigmoid layer. We use this to calculate the error signal propagated to the two hidden nodes, <b><i>H<sub>1</sub></b></i> and <b><i>H<sub>2</sub></b></i>.</p>
   <div>
     $$\begin{eqnarray} 
-    \frac{\partial E}{\partial W_{H_1\rightarrow\sigma}} &=& H_1    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (-0.8)(0.0217) \phantom{aa}  \rightarrow \phantom{a} -0.01736\\
-    \frac{\partial E}{\partial W_{H_2\rightarrow\sigma}} &=& H_2    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (1.2)(0.0217) \phantom{aaa}  \rightarrow \phantom{aaa} 0.02604 \nonumber\\
+    \frac{\partial E}{\partial W_{H_1\sigma}} &=& H_1    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (-0.8)(0.0217) \phantom{aa}  \rightarrow \phantom{a} -0.01736\\
+    \frac{\partial E}{\partial W_{H_2\sigma}} &=& H_2    \frac{\partial E}{\partial z_\sigma} \nonumber \phantom{aa}  \rightarrow \phantom{aa}  (1.2)(0.0217) \phantom{aaa}  \rightarrow \phantom{aaa} 0.02604 \nonumber\\
     \end{eqnarray}$$
   </div>
   <p> Now that we have all of the error derivatives, we can employ gradient descent. In adjusting the weights for the output layer (<b><i>W<sub>2a</sub></i></b>, <b><i>W<sub>2b</sub></i></b>), we multiply together (1.) the learning rate paramater, <b>&#951;</b> = 0.5 (2.) the output unit error, and (3.) the hidden unit activation value. For the hidden unit activation values, recall that
   <div>
   $$\begin{eqnarray} 
-  y_{H_1\rightarrow\sigma} &=& (H_1)(W_{H_1\rightarrow\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (-0.8)(0.7) \phantom{aa}  \rightarrow \phantom{aa} -0.56 \nonumber\\
-  y_{H_2\rightarrow\sigma} &=& (H_2)(W_{H_2\rightarrow\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (1.2)(-0.6) \phantom{aa}  \rightarrow \phantom{aa} -0.72 \nonumber\\
+  y_{H_1\sigma} &=& (H_1)(W_{H_1\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (-0.8)(0.7) \phantom{aa}  \rightarrow \phantom{aa} -0.56 \nonumber\\
+  y_{H_2\sigma} &=& (H_2)(W_{H_2\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (1.2)(-0.6) \phantom{aa}  \rightarrow \phantom{aa} -0.72 \nonumber\\
   \end{eqnarray}$$
   </div>
   <p> Given these inputs, the changes to the weights feeding the neural net's output layer are calculated as follows.
   <div>
   $$\begin{eqnarray} 
-  \Delta W_{H_1\rightarrow\sigma} &=& (\eta)\Big(\frac{\partial E}{\partial y_\sigma}\Big)(y_{H_1\rightarrow\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.131)(-0.56) \phantom{aa}  \rightarrow \phantom{aa} -0.036 \nonumber \\
-  \Delta W_{H_2\rightarrow\sigma} &=& (\eta)\Big(\frac{\partial E}{\partial y_\sigma}\Big)(y_{H_1\rightarrow\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.131)(-0.72) \phantom{aa}  \rightarrow \phantom{aa} -0.047 \nonumber \\
+  \Delta W_{H_1\sigma} &=& (\eta)\Big(\frac{\partial E}{\partial y_\sigma}\Big)(y_{H_1\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.131)(-0.56) \phantom{aa}  \rightarrow \phantom{aa} -0.036 \nonumber \\
+  \Delta W_{H_2\sigma} &=& (\eta)\Big(\frac{\partial E}{\partial y_\sigma}\Big)(y_{H_1\sigma}) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.131)(-0.72) \phantom{aa}  \rightarrow \phantom{aa} -0.047 \nonumber \\
   \end{eqnarray}$$
   </div>
   <p> With the new weights in hand, we can see that we are slightly decreasing the flow of infomation between both the <b><i>H<sub>1</sub></i></b> node and the sigmoid node (0.7 - 0.036 &rarr; 0.664) as well as between the <b><i>H<sub>2</sub></i></b> node and the sigmoid node (-0.6 - 0.047 &rarr; -0.647).<br>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Moving on to the weights in the preceding layer (<b><i>W<sub>1a</sub></i></b>, <b><i>W<sub>1b</sub></i></b>, <b><i>W<sub>1c</sub></i></b>, <b><i>W<sub>1d</sub></i></b>), we adjust the updating formula slighty. The change in weights between the input layer and the hidden layer is calculated by multiplying together (1.) the learning rate, (2.) the hidden unit's error, and (3.) the input values, <b><i>X<sub>1</sub></i></b> = 8 and <b><i>X<sub>2</sub></i></b> = -4.
   <div>
   $$\begin{eqnarray} 
-  \Delta W_{X_1\rightarrow H_1} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_1\rightarrow\sigma}}\Big)(X_1) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(-0.01736)(8) \phantom{aaaa}  \rightarrow \phantom{aa} -0.069 \nonumber \\
-  \Delta W_{X_1\rightarrow H_2} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_2\rightarrow\sigma}}\Big)(X_1) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.02604)(8) \phantom{aaaaaa}  \rightarrow \phantom{aaaa} 0.104 \nonumber \\
-  \Delta W_{X_2\rightarrow H_1} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_1\rightarrow\sigma}}\Big)(X_2) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(-0.01736)(-4) \phantom{aaa}  \rightarrow \phantom{aaaa} 0.034 \nonumber \\
-  \Delta W_{X_2\rightarrow H_2} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_2\rightarrow\sigma}}\Big)(X_2) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.02604)(-4) \phantom{aaaaa}  \rightarrow \phantom{aa} -0.052 \nonumber \\
+  \Delta W_{X_1 H_1} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_1\sigma}}\Big)(X_1) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(-0.01736)(8) \phantom{aaaa}  \rightarrow \phantom{aa} -0.069 \nonumber \\
+  \Delta W_{X_1 H_2} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_2\sigma}}\Big)(X_1) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.02604)(8) \phantom{aaaaaa}  \rightarrow \phantom{aaaa} 0.104 \nonumber \\
+  \Delta W_{X_2 H_1} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_1\sigma}}\Big)(X_2) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(-0.01736)(-4) \phantom{aaa}  \rightarrow \phantom{aaaa} 0.034 \nonumber \\
+  \Delta W_{X_2 H_2} &=& (\eta)\Big( \frac{\partial E}{\partial W_{H_2\sigma}}\Big)(X_2) \phantom{aa}  \rightarrow \phantom{aa} (0.5)(0.02604)(-4) \phantom{aaaaa}  \rightarrow \phantom{aa} -0.052 \nonumber \\
   \end{eqnarray}$$
   </div>
 
